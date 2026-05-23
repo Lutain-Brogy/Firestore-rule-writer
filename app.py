@@ -101,11 +101,27 @@ service cloud.firestore {{
 }}
 """)
 
-elif auth_choice == "email":
-    st.code("request.auth.token.email")
+database = st.text_input("Enter database name", value="(default)")
+document_path = st.text_input("Enter document path", value="/users/{userId}")
+email_value = st.text_input("Enter allowed email (for matching)", value="admin@gmail.com")
 
-elif auth_choice == "verified email":
-    st.code("request.auth.token.email_verified == true")
+if auth_choice == "email":
+    st.code(f"""
+rules_version = '2';
+
+service cloud.firestore {{
+  match /databases/{database}/documents {{
+
+    match {document_path} {{
+      allow read: if request.auth != null 
+                  && request.auth.token.email == "{email_value}";
+
+      allow write: if request.auth != null 
+                   && request.auth.token.email == "{email_value}";
+    }}
+  }}
+}}
+""")
 
 elif auth_choice == "admin role":
     st.code("request.auth.token.admin == true")
