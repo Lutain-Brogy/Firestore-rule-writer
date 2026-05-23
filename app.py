@@ -26,6 +26,7 @@ if choice == "Allow read only":
             "read field-based conditions"
         ]
     )
+    
 
  if edit_choice == "read public access":
     st.write("Public access - anyone can read")
@@ -41,6 +42,8 @@ service cloud.firestore {
   }
 }
 """)
+
+
 
     elif edit_choice == "Authenticated access":
         st.write("Authenticated access - only logged in users.")
