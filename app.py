@@ -42,8 +42,72 @@ service cloud.firestore {
 }
 """)
 
-elif edit_choice == "Authenticated access":
+elif edit_choice == "read authenticated access":
     st.write("Authenticated access - only logged in users.")
+
+    auth_choice = st.selectbox(
+        "Choose authentication type",
+        [
+            "logged in",
+            "uid",
+            "email",
+            "verified email",
+            "admin role",
+            "login provider",
+            "document ownership",
+            "incoming data validation",
+            "time/date",
+            "premium subscription",
+            "field change check"
+        ]
+    )
+
+database = st.text_input("Enter database name", value="(default)")
+document_path = st.text_input("Enter document/collection path", value="/{document=**}")
+
+if auth_choice == "logged in":
+    st.code(f"""
+rules_version = '2';
+
+service cloud.firestore {{
+  match /databases/{database}/documents {{
+
+    match {document_path} {{
+      allow read, write: if request.auth != null;
+    }}
+  }}
+}}
+""")
+
+elif auth_choice == "uid":
+    st.code("request.auth.uid")
+
+elif auth_choice == "email":
+    st.code("request.auth.token.email")
+
+elif auth_choice == "verified email":
+    st.code("request.auth.token.email_verified == true")
+
+elif auth_choice == "admin role":
+    st.code("request.auth.token.admin == true")
+
+elif auth_choice == "login provider":
+    st.code('request.auth.token.firebase.sign_in_provider == "google.com"')
+
+elif auth_choice == "document ownership":
+    st.code("resource.data.ownerId == request.auth.uid")
+
+elif auth_choice == "incoming data validation":
+    st.code("request.resource.data")
+
+elif auth_choice == "time/date":
+    st.code("request.time")
+
+elif auth_choice == "premium subscription":
+    st.code("request.auth.token.premium == true")
+
+elif auth_choice == "field change check":
+    st.code("request.resource.data.role == resource.data.role")
 
 elif edit_choice == "Role-based access":
     st.write("Role-based access - logged in users with roles can read specific documents.")
