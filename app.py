@@ -118,10 +118,11 @@ service cloud.firestore {{
 
       allow write: if request.auth != null 
                    && request.auth.token.email == "{email_value}";
-    }}
+     }}
   }}
 }}
-""")
+        """)
+
 
 elif auth_choice == "admin role":
     st.code("request.auth.token.admin == true")
