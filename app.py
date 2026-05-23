@@ -26,6 +26,7 @@ if choice == "Allow read only":
             "read field-based conditions"
         ]
     )
+    
 if edit_choice == "read public access":
     st.write("Public access - anyone can read")
     
