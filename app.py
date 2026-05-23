@@ -79,8 +79,27 @@ service cloud.firestore {{
 }}
 """)
 
-elif auth_choice == "uid":
-    st.code("request.auth.uid")
+database = st.text_input("Enter database name", value="(default)")
+document_path = st.text_input("Enter document path", value="/users/{userId}")
+user_field = st.text_input("Field storing user ID", value="ownerId")
+
+if auth_choice == "uid":
+    st.code(f"""
+rules_version = '2';
+
+service cloud.firestore {{
+  match /databases/{database}/documents {{
+
+    match {document_path} {{
+      allow read: if request.auth != null 
+                  && resource.data.{user_field} == request.auth.uid;
+
+      allow write: if request.auth != null 
+                   && resource.data.{user_field} == request.auth.uid;
+    }}
+  }}
+}}
+""")
 
 elif auth_choice == "email":
     st.code("request.auth.token.email")
