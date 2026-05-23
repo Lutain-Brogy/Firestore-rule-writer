@@ -17,7 +17,7 @@ if choice == "Allow read only":
     edit_choice = st.selectbox(
         "Select read rule type:",
         [
-            "pread ublic access",
+            "read public access",
             "read authenticated access",
             "read role-based access",
             "read owner-based access",
@@ -28,7 +28,8 @@ if choice == "Allow read only":
     )
 if edit_choice == "read public access":
     st.write("Public access - anyone can read")
-    st.write("""
+    
+    st.code("""
 rules_version = '2';
 
 service cloud.firestore {
