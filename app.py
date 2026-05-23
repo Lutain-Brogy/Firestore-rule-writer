@@ -28,7 +28,6 @@ if choice == "Allow read only":
     )
 if edit_choice == "read public access":
     st.write("Public access - anyone can read")
-
     st.code("""
 rules_version = '2';
 
