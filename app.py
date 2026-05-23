@@ -50,10 +50,7 @@ elif edit_choice == "read authenticated access":
         [
             "logged in",
             "uid",
-            "email",
-            "verified email",
             "admin role",
-            "login provider",
             "document ownership",
             "incoming data validation",
             "time/date",
@@ -101,34 +98,21 @@ service cloud.firestore {{
 }}
 """)
 
-database = st.text_input("Enter database name", value="(default)")
-document_path = st.text_input("Enter document path", value="/users/{userId}")
-email_value = st.text_input("Enter allowed email (for matching)", value="admin@gmail.com")
-
-if auth_choice == "email":
-    st.code(f"""
+elif auth_choice == "admin role":
+    st.code("""
 rules_version = '2';
 
-service cloud.firestore {{
-  match /databases/{database}/documents {{
+service cloud.firestore {
+  match /databases/{database}/documents {
 
-    match {document_path} {{
-      allow read: if request.auth != null 
-                  && request.auth.token.email == "{email_value}";
+    match /{document=**} {
+      allow read, write: if request.auth != null
+                          && request.auth.token.admin == true;
+    }
+  }
+}
+""")
 
-      allow write: if request.auth != null 
-                   && request.auth.token.email == "{email_value}";
-     }}
-  }}
-}}
-        """)
-
-
-elif auth_choice == "admin role":
-    st.code("request.auth.token.admin == true")
-
-elif auth_choice == "login provider":
-    st.code('request.auth.token.firebase.sign_in_provider == "google.com"')
 
 elif auth_choice == "document ownership":
     st.code("resource.data.ownerId == request.auth.uid")
