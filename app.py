@@ -13,7 +13,7 @@ choice = st.selectbox(
     ]
 )
 
-if choice == 'Allow read':
+if choice == 'Allow read only':
     st.write('Public access - anyone can read')
     st.write('Authenticated access - only logged in users.')
     st.write('Role-based access - logged in and roles can read specific documents.')
