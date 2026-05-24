@@ -59,28 +59,11 @@ elif edit_choice == "read authenticated access":
         ]
     )
 
-
+#only lets te signed in read
 if auth_choice == "logged in":
     database = st.text_input("Enter database name", value="(default)")
-document_path = st.text_input("Enter document/collection path", value="/{document=**}")
-st.code(f"""
-rules_version = '2';
+    document_path = st.text_input("Enter document path", value="/{document=**}")
 
-service cloud.firestore {{
-  match /databases/{database}/documents {{
-
-    match {document_path} {{
-      allow read, write: if request.auth != null;
-    }}
-  }}
-}}
-""")
-
-database = st.text_input("Enter database name", value="(default)")
-document_path = st.text_input("Enter document path", value="/users/{userId}")
-user_field = st.text_input("Field storing user ID", value="ownerId")
-
-if auth_choice == "uid":
     st.code(f"""
 rules_version = '2';
 
@@ -88,15 +71,13 @@ service cloud.firestore {{
   match /databases/{database}/documents {{
 
     match {document_path} {{
-      allow read: if request.auth != null 
-                  && resource.data.{user_field} == request.auth.uid;
-
-      allow write: if request.auth != null 
-                   && resource.data.{user_field} == request.auth.uid;
+      allow read: if request.auth != null;
     }}
   }}
 }}
 """)
+
+# only lets the admin/creator read
 
 elif auth_choice == "admin role":
     st.code("""
@@ -114,8 +95,24 @@ service cloud.firestore {
 """)
 
 
-elif auth_choice == "document ownership":
-    st.code("resource.data.ownerId == request.auth.uid")
+if auth_choice == "document ownership":
+    database = st.text_input("Enter database name", value="(default)")
+    document_path = st.text_input("Enter document path", value="/users/{userId}")
+    user_field = st.text_input("Field storing owner UID", value="ownerId")
+
+    st.code(f"""
+rules_version = '2';
+
+service cloud.firestore {{
+  match /databases/{database}/documents {{
+
+    match {document_path} {{
+      allow read, write: if request.auth != null
+                          && resource.data.{user_field} == request.auth.uid;
+    }}
+  }}
+}}
+""")
 
 elif auth_choice == "incoming data validation":
     st.code("request.resource.data")
