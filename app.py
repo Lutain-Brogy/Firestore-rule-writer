@@ -63,7 +63,7 @@ elif edit_choice == "read authenticated access":
 if auth_choice == "logged in":
     database = st.text_input("Enter database name", value="(default)")
 document_path = st.text_input("Enter document/collection path", value="/{document=**}")
-    st.code(f"""
+st.code(f"""
 rules_version = '2';
 
 service cloud.firestore {{
