@@ -46,6 +46,7 @@ service cloud.firestore {
 elif edit_choice == "read authenticated access":
     st.write("Authenticated access - only logged in users.")
 
+    
     auth_choice = st.selectbox(
         "Choose authentication type",
         [
