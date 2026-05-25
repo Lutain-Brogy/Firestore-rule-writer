@@ -59,7 +59,6 @@ elif edit_choice == "read authenticated access":
         ]
     )
 
-#only lets te signed in read
 
 if auth_choice == "logged in":
     database = st.text_input("Enter database name", value="(default)")
