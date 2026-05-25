@@ -52,7 +52,7 @@ elif edit_choice == "read authenticated access":
             "uid",
             "admin role",
             "document ownership",
-            "incoming data validation",
+            "custorm based",
             "time/date",
             "premium subscription",
             "field change check"
@@ -94,6 +94,7 @@ service cloud.firestore {
 }
 """)
 
+#only alows read to who the document is assigned to
 
 if auth_choice == "document ownership":
     database = st.text_input("Enter database name", value="(default)")
@@ -114,17 +115,18 @@ service cloud.firestore {{
 }}
 """)
 
-elif auth_choice == "incoming data validation":
-    st.code("request.resource.data")
+
+elif auth_choice == "custorm based":
+    st.write("make you own custorm term by talking to Lutzet at Whop") 
 
 elif auth_choice == "time/date":
-    st.code("request.time")
+    st.write("Talk with Luzet to make this one")  
 
 elif auth_choice == "premium subscription":
-    st.code("request.auth.token.premium == true")
+    st.write("Talk with Luzet to make this one")
 
 elif auth_choice == "field change check":
-    st.code("request.resource.data.role == resource.data.role")
+    st.write("Talk with Luzet to make this one active")
 
 elif edit_choice == "Role-based access":
     st.write("Role-based access - logged in users with roles can read specific documents.")
