@@ -93,12 +93,12 @@ service cloud.firestore {
 """)
 #only alows read to who the document is assigned to
 
-elif auth_choice == "document ownership":
-    database = st.text_input("Enter database name", value="(default)")
-    document_path = st.text_input("Enter document path", value="/users/{userId}")
-    user_field = st.text_input("Field storing owner UID", value="ownerId")
+    elif auth_choice == "document ownership":
+        database = st.text_input("Enter database name", value="(default)")
+        document_path = st.text_input("Enter document path", value="/users/{userId}")
+        user_field = st.text_input("Field storing owner UID", value="ownerId")
 
-    st.code(f"""
+        st.code(f"""
 rules_version = '2';
 
 service cloud.firestore {{
@@ -112,18 +112,17 @@ service cloud.firestore {{
 }}
 """)
 
+    elif auth_choice == "custom based":
+        st.write("Make your own custom term by talking to Lutzet at Whop")
 
-elif auth_choice == "custorm based":
-    st.write("make you own custorm term by talking to Lutzet at Whop") 
+    elif auth_choice == "time/date":
+        st.write("Talk with Lutzet to make this one")
 
-elif auth_choice == "time/date":
-    st.write("Talk with Luzet to make this one")  
+    elif auth_choice == "premium subscription":
+        st.write("Talk with Lutzet to make this one")
 
-elif auth_choice == "premium subscription":
-    st.write("Talk with Luzet to make this one")
-
-elif auth_choice == "field change check":
-    st.write("Talk with Luzet to make this one active")
+    elif auth_choice == "field change check":
+        st.write("Talk with Lutzet to make this one active")
 
 #elif edit_choice == "Role-based access":
 #    st.write("Role-based access - logged in users with roles can read specific documents.")
