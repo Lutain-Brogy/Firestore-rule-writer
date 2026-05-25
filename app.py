@@ -46,7 +46,6 @@ service cloud.firestore {
 elif edit_choice == "read authenticated access":
     st.write("Authenticated access - only logged in users.")
 
-    
     auth_choice = st.selectbox(
         "Choose authentication type",
         [
@@ -60,12 +59,11 @@ elif edit_choice == "read authenticated access":
         ]
     )
 
+    if auth_choice == "logged in":
+        database = st.text_input("Enter database name", value="(default)")
+        document_path = st.text_input("Enter document path", value="/{document=**}")
 
-  if auth_choice == "logged in":
-    database = st.text_input("Enter database name", value="(default)")
-    document_path = st.text_input("Enter document path", value="/{document=**}")
-
-    st.code(f"""
+        st.code(f"""
 rules_version = '2';
 
 service cloud.firestore {{
@@ -78,10 +76,9 @@ service cloud.firestore {{
 }}
 """)
 
-# only lets the admin/creator read
-
-elif auth_choice == "admin role":
-    st.code("""
+    # only lets the admin/creator read
+    elif auth_choice == "admin role":
+        st.code("""
 rules_version = '2';
 
 service cloud.firestore {
@@ -94,7 +91,6 @@ service cloud.firestore {
   }
 }
 """)
-
 #only alows read to who the document is assigned to
 
 if auth_choice == "document ownership":
