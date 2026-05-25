@@ -129,20 +129,17 @@ elif auth_choice == "premium subscription":
 elif auth_choice == "field change check":
     st.write("Talk with Luzet to make this one active")
 
+#elif edit_choice == "Role-based access":
+#    st.write("Role-based access - logged in users with roles can read specific documents.")
 
-"""
-elif edit_choice == "Role-based access":
-    st.write("Role-based access - logged in users with roles can read specific documents.")
+#elif edit_choice == "Owner-based access":
+ #   st.write("Owner-based access - only the document creator can read.")
 
-elif edit_choice == "Owner-based access":
-    st.write("Owner-based access - only the document creator can read.")
+#elif edit_choice == "Shared list access":
+ #   st.write("Shared list access - only specific allowed users can read.")
 
-elif edit_choice == "Shared list access":
-    st.write("Shared list access - only specific allowed users can read.")
+#elif edit_choice == "Time-based access":
+ #   st.write("Time-based access - allowed only before/after a time.")
 
-elif edit_choice == "Time-based access":
-    st.write("Time-based access - allowed only before/after a time.")
-
-elif edit_choice == "Field-based conditions":
-    st.write("Field-based conditions - depends on data inside the document (e.g. isPublic == true).")
-"""
+#elif edit_choice == "Field-based conditions":
+ #   st.write("Field-based conditions - depends on data inside the document (e.g. isPublic == true).")
