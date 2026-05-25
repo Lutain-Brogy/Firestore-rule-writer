@@ -50,10 +50,9 @@ elif edit_choice == "read authenticated access":
         "Choose authentication type",
         [
             "logged in",
-            "uid",
             "admin role",
             "document ownership",
-            "custorm based",
+            "custom based",
             "time/date",
             "premium subscription",
             "field change check"
@@ -61,6 +60,7 @@ elif edit_choice == "read authenticated access":
     )
 
 #only lets te signed in read
+
 if auth_choice == "logged in":
     database = st.text_input("Enter database name", value="(default)")
     document_path = st.text_input("Enter document path", value="/{document=**}")
