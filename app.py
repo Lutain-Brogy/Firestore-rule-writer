@@ -93,7 +93,7 @@ service cloud.firestore {
 """)
 #only alows read to who the document is assigned to
 
-if auth_choice == "document ownership":
+elif auth_choice == "document ownership":
     database = st.text_input("Enter database name", value="(default)")
     document_path = st.text_input("Enter document path", value="/users/{userId}")
     user_field = st.text_input("Field storing owner UID", value="ownerId")
