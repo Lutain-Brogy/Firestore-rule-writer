@@ -6,10 +6,11 @@ choice = st.selectbox(
     "What rule would you like to write?",
     [
         "Allow read only",
-        "Allow write only",
-        "Allow read and write",
-        "Deny all access",
-        "Custom (one allowed, one denied)"
+#        "Allow write only",
+ #       "Allow read and write",
+  #      "Deny all access",
+   #     "Custom (one allowed, one denied)"
+        
     ]
 )
 
@@ -19,11 +20,11 @@ if choice == "Allow read only":
         [
             "read public access",
             "read authenticated access",
-            "read role-based access",
-            "read owner-based access",
-            "read shared list access",
-            "read time-based access",
-            "read field-based conditions"
+          #  "read role-based access",
+           # "read owner-based access",
+            #"read shared list access",
+            #"read time-based access",
+            #"read field-based conditions"
         ]
     )
     
@@ -128,6 +129,8 @@ elif auth_choice == "premium subscription":
 elif auth_choice == "field change check":
     st.write("Talk with Luzet to make this one active")
 
+
+"""
 elif edit_choice == "Role-based access":
     st.write("Role-based access - logged in users with roles can read specific documents.")
 
@@ -142,3 +145,4 @@ elif edit_choice == "Time-based access":
 
 elif edit_choice == "Field-based conditions":
     st.write("Field-based conditions - depends on data inside the document (e.g. isPublic == true).")
+"""
